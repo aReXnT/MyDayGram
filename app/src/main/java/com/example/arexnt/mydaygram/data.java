@@ -10,7 +10,7 @@ public class data implements Serializable{
 
     private String content;
     private String week;
-    private int day;
+    private String day;
 
     public String getContent(){
         return content;
@@ -24,13 +24,13 @@ public class data implements Serializable{
     public void setWeek(String week){
         this.week = week;
     }
-    public int getDay(){
+    public String getDay(){
         return day;
     }
-    public void setDay(int day){
+    public void setDay(String day){
         this.day = day;
     }
-    public data(String content, String week, int day){
+    public data(String content, String week, String day){
         this.content = content;
         this.week = week;
         this.day = day;
