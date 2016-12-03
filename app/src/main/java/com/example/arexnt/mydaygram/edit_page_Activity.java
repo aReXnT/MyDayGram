@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class edit_page_Activity extends AppCompatActivity implements View.OnClickListener{
 
@@ -21,6 +22,7 @@ public class edit_page_Activity extends AppCompatActivity implements View.OnClic
     private ImageButton addTimebtn, backbtn, savebtn;
     private NoteDB mNoteDB;
     private SQLiteDatabase dbWriter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +70,11 @@ public class edit_page_Activity extends AppCompatActivity implements View.OnClic
     public  void addDB(){
         ContentValues cv = new ContentValues();
         cv.put(NoteDB.CONTENT,mEditText.getText().toString());
+        cv.put(NoteDB.YEAR,getStr("YEAR"));
+        cv.put(NoteDB.MONTH,getStr("MONTH"));
         cv.put(NoteDB.WEEK,getStr("WEEK"));
         cv.put(NoteDB.DAY,getStr("DAY"));
+        Log.i("insertInfo",cv.toString());
         dbWriter.insert(NoteDB.TABLE_NAME, null,cv);
     }
 //    public String getTime(){
@@ -78,14 +83,27 @@ public class edit_page_Activity extends AppCompatActivity implements View.OnClic
 //        return date;
 //    }
     public String getStr(String str) {
-        String date;
-        if (str == "WEEK") {
-            SimpleDateFormat sdf = new SimpleDateFormat("E");
-            date = sdf.format(new java.util.Date());
-        }else {
-            SimpleDateFormat sdf = new SimpleDateFormat("d");
-            date = sdf.format(new java.util.Date());
+        String date = null;
+
+        switch (str){
+            case "YEAR":
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+                date = sdf.format(new java.util.Date());
+                break;
+            case "MONTH":
+                sdf = new SimpleDateFormat("MMMM", Locale.ENGLISH);
+                date = sdf.format(new java.util.Date());
+                break;
+            case "WEEK":
+                sdf = new SimpleDateFormat("E", Locale.ENGLISH);
+                date = sdf.format(new java.util.Date());
+                break;
+            case "DAY":
+                sdf = new SimpleDateFormat("dd");
+                date = sdf.format(new java.util.Date());
+                break;
         }
+
         return date;
     }
 }

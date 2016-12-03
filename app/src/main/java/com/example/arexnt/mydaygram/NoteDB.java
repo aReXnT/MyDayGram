@@ -12,6 +12,8 @@ public class NoteDB extends SQLiteOpenHelper {
     public static final String TABLE_NAME = "note";
     public static final String CONTENT = "content";
     public static final String ID = "_id";
+    public static final String YEAR = "year";
+    public static final String MONTH = "month";
     public static final String WEEK = "week";
     public static final String DAY = "day";
 
@@ -26,6 +28,8 @@ public class NoteDB extends SQLiteOpenHelper {
                 + TABLE_NAME + "("
                 + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + CONTENT + " TEXT, "
+                + YEAR + " TEXT, "
+                + MONTH + " TEXT, "
                 + WEEK + " TEXT, "
                 + DAY + " TEXT)"
                 );
